@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OdinXAI - Rules of Engagement</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --odin-mint: #4DDF9C;
+            --odin-blue: #6453EE;
+            --odin-black: #000000;     
+            --odin-dark-bg: #0A0A0A;   
+            --odin-light-text: #F0F0F0;
+            --odin-white: #ffffff;
+            --font-main: 'Poppins', sans-serif;
+        }
+
+        /* --- Base Styles --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: var(--font-main);
+            background-color: var(--odin-dark-bg);
+            color: var(--odin-light-text);
+            line-height: 1.6;
+        }
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: var(--odin-black);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            color: var(--odin-mint);
+            font-size: 3em;
+            margin-bottom: 10px;
+            border-bottom: 2px solid rgba(77, 223, 156, 0.3);
+            padding-bottom: 15px;
+        }
+        h2 {
+            font-size: 1.8em;
+            color: var(--odin-blue);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        p { margin-bottom: 20px; font-weight: 300; }
+        
+        .engagement-list {
+            list-style: none;
+            padding: 0;
+        }
+        .engagement-list li {
+            margin-bottom: 25px;
+            padding: 15px;
+            background: var(--odin-dark-bg);
+            border-left: 4px solid var(--odin-blue);
+            border-radius: 5px;
+        }
+        .engagement-list li strong {
+            color: var(--odin-mint);
+            display: block;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            color: var(--odin-mint);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Rules of Engagement (Terms of Service)</h1>
+        <p>The code of conduct and contractual foundation for your OdinXAI Autonomous Agent deployment. By joining the waitlist, you agree to these operational mandates.</p>
+
+        <ul class="engagement-list">
+            <li>
+                <strong>Operational Mandate: Autonomous Control</strong>
+                The Agent operates 24/7/365 within the configured workflow parameters. You agree that the Agent's decisions within its programmed scope are final and binding until manually overridden or re-trained.
+            </li>
+            <li>
+                <strong>Data Sovereignty and Training</strong>
+                All business data provided for Agent training remains the property of your organization. OdinXAI uses this data exclusively to optimize your Agent's performance and voice replication.
+            </li>
+            <li>
+                <strong>Initiation Fee & Deployment</strong>
+                The one-time Initiation Fee is charged upon the formal assignment of your dedicated Agent Architect and commencement of the 30-day deployment phase. This fee is non-refundable once deployment begins.
+            </li>
+            <li>
+                <strong>Monthly Subscription Billing</strong>
+                Monthly fees are billed on the first day the Agent is set to 'Live' status on your production systems, following the successful completion of the deployment phase.
+            </li>
+            <li>
+                <strong>Termination of Service</strong>
+                Service may be terminated with 30 days written notice. Access to the Agent and its operational logs will cease on the final day of the billing cycle.
+            </li>
+        </ul>
+
+        <h2>Dispute Resolution</h2>
+        <p>All conflicts are resolved through a mandatory review process led by a senior Agent Architect and a neutral human mediator, prioritizing operational efficiency and pre-agreed objectives.</p>
+
+        <a href="index.html" class="back-link">&leftarrow; Return to Command Center</a>
+    </div>
+</body>
+</html>

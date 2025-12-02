@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Deployment | OdinXAI</title>
+    <link rel="icon" href="odinxai-logo.png" type="image/png">
+    <script src="https://js.stripe.com/v3/"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
+        :root {
+            --odin-mint: #4DDF9C;
+            --odin-blue: #6453EE;
+            --odin-black: #000000;     
+            --odin-dark-bg: #0A0A0A;   
+            --odin-light-text: #F0F0F0;
+            --odin-white: #ffffff;
+            --odin-gray: #1a1a1a;
+            --font-main: 'Poppins', sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
+            --font-logo: 'Orbitron', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--odin-dark-bg);
+            color: var(--odin-light-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                linear-gradient(rgba(77, 223, 156, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(77, 223, 156, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(77, 223, 156, 0.2);
+            background: rgba(10, 10, 10, 0.95);
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--odin-light-text);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center; 
+            font-family: var(--font-logo);
+            letter-spacing: 2px;
+        }
+        
+        .logo-letter.eye {
+            color: var(--odin-mint);
+            font-size: 1.5em; 
+            line-height: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 20px; 
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(77, 223, 156, 0.2);
+            position: relative;
+            transform: scale(0.9);
+            margin: 0 5px;
+        }
+        .logo-letter.eye::before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 8px;
+            background-color: var(--odin-blue);
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            margin: 40px auto;
+            flex-grow: 1;
+        }
+
+        .checkout-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 40px;
+        }
+
+        .form-section h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: var(--odin-white);
+            border-bottom: 2px solid var(--odin-mint);
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .form-group { margin-bottom: 20px; }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        input[type="text"], input[type="email"] {
+            width: 100%;
+            padding: 12px 15px;
+            background: var(--odin-gray);
+            border: 1px solid #333;
+            border-radius: 6px;
+            color: var(--odin-light-text);
+            font-family: var(--font-mono);
+            font-size: 1em;
+            transition: all 0.3s ease;
+        }
+        input:focus {
+            outline: none;
+            border-color: var(--odin-mint);
+            box-shadow: 0 0 10px rgba(77, 223, 156, 0.2);
+            background: #222;
+        }
+
+        /* --- STRIPE ELEMENT CONTAINER --- */
+        #payment-element {
+            margin-bottom: 24px;
+            min-height: 200px; /* Prevent layout shift */
+        }
+        
+        #error-message {
+            color: #ff4d4d;
+            font-size: 0.9em;
+            margin-top: 10px;
+            display: none;
+            padding: 10px;
+            border: 1px solid #ff4d4d;
+            border-radius: 4px;
+            background: rgba(255, 77, 77, 0.1);
+        }
+
+        .order-summary {
+            background: rgba(26, 26, 26, 0.6);
+            border: 1px solid var(--odin-blue);
+            border-radius: 10px;
+            padding: 30px;
+            height: fit-content;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            position: sticky;
+            top: 20px;
+        }
+
+        .summary-header {
+            margin-bottom: 25px;
+            font-family: var(--font-mono);
+            font-size: 0.9em;
+            color: var(--odin-mint);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 1px dashed rgba(77, 223, 156, 0.3);
+            padding-bottom: 10px;
+        }
+
+        .plan-name { font-size: 1.8em; font-weight: 700; color: var(--odin-white); margin-bottom: 5px; }
+        .billing-cycle { font-size: 0.9em; color: #aaa; margin-bottom: 20px; }
+
+        .line-item { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 0.95em; }
+        .line-item.total {
+            margin-top: 20px; padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 1.2em; font-weight: 700; color: var(--odin-mint);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            background-color: var(--odin-mint);
+            color: var(--odin-black);
+            padding: 15px;
+            border: none;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(77, 223, 156, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .checkout-btn:hover { background-color: #3ecc8c; transform: translateY(-2px); box-shadow: 0 6px 20px rgba(77, 223, 156, 0.6); }
+        .checkout-btn:disabled { background: #555; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            width: 20px; height: 20px;
+            border: 3px solid rgba(0,0,0,0.3);
+            border-radius: 50%;
+            border-top-color: #000;
+            animation: spin 1s ease-in-out infinite;
+            margin-left: 10px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        @media (max-width: 768px) {
+            .checkout-grid { grid-template-columns: 1fr; }
+            .order-summary { grid-row: 1; } 
+        }
+        
+        footer { margin-top: auto; padding: 20px; text-align: center; font-size: 0.8em; color: #666; border-top: 1px solid #222; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">
+            <span class="logo-letter eye"></span>ODINXAI
+        </a>
+    </header>
+
+    <div class="container">
+        <div class="checkout-grid">
+            
+            <div class="form-section">
+                <h2>Billing Information</h2>
+                <div class="form-group">
+                    <label for="email">Business Email</label>
+                    <input type="email" id="email" required placeholder="john@company.com">
+                </div>
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required placeholder="John Doe">
+                </div>
+
+                <h2 style="margin-top: 40px;">Payment Method</h2>
+                
+                <div id="payment-element">
+                    </div>
+                
+                <div id="error-message"></div>
+            </div>
+
+            <aside class="order-summary">
+                <div class="summary-header">// DEPLOYMENT MANIFEST</div>
+                <div class="plan-name" id="summaryPlanName">Loading...</div>
+                <div class="billing-cycle">Billed Monthly</div>
+
+                <hr style="border: 0; border-top: 1px solid #333; margin: 20px 0;">
+
+                <div class="line-item"><span>Monthly Subscription</span><span id="summaryPlanPrice">...</span></div>
+                <div class="line-item"><span>Initiation & Setup Fee</span><span>$499.00</span></div>
+                <div class="line-item total"><span>Due Today</span><span id="summaryTotal">...</span></div>
+
+                <button id="submit" class="checkout-btn">
+                    <span id="button-text">Initialize Deployment</span>
+                    <div class="spinner" id="spinner"></div>
+                </button>
+
+                <div class="secure-badge" style="margin-top: 20px; text-align: center; font-size: 0.8em; color: #888;">
+                    <span>🔒</span> 256-Bit SSL Secure Encryption
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <footer>&copy; 2025 OdinXAI. All payments processed securely via Stripe.</footer>
+
+    <script>
+        // --- 1. CONFIGURATION ---
+        // I have inserted your specific key below:
+        const stripe = Stripe("pk_test_51SZtZBJmteK8P9CT204g6ojxpALeRhP9iMnxyc7ZXtL9XI530SUDEy5k3GzegytcyH8SFtp3Za1NbHEp5ZWL7auM00yCLM9ch8"); 
+
+        const plans = {
+            'Essential': { price: 99, name: 'Essential Tier' },
+            'Growth': { price: 199, name: 'Growth Tier' }, 
+            'Scale': { price: 299, name: 'Scale Tier' },
+            'Custom': { price: 0, name: 'Custom Build' }
+        };
+        const setupFee = 499;
+
+        // --- 2. LOAD PLAN FROM URL ---
+        const urlParams = new URLSearchParams(window.location.search);
+        const selectedPlanKey = urlParams.get('plan') || 'Growth';
+        const planData = plans[selectedPlanKey] || plans['Growth'];
+
+        // Update UI
+        document.getElementById('summaryPlanName').textContent = planData.name;
+        document.getElementById('summaryPlanPrice').textContent = `$${planData.price}.00`;
+        const totalAmount = planData.price + setupFee;
+        document.getElementById('summaryTotal').textContent = `$${totalAmount}.00`;
+
+        // --- 3. INITIALIZE STRIPE ELEMENTS ---
+        let elements;
+
+        async function initialize() {
+            // This fetch calls your Netlify Function (Backend).
+            // It will fail if you haven't set up the 'netlify/functions/create-payment-intent.js' file.
+            const response = await fetch("/.netlify/functions/create-payment-intent", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ 
+                    plan: selectedPlanKey,
+                    amount: totalAmount * 100 // Stripe expects cents
+                }),
+            });
+
+            if (!response.ok) {
+                const errorText = await response.text();
+                console.error("Backend Error:", errorText);
+                document.getElementById('error-message').textContent = "System Error: Unable to initialize payment processor. Please check backend logs.";
+                document.getElementById('error-message').style.display = 'block';
+                return;
+            }
+
+            const { clientSecret } = await response.json();
+
+            // Custom Style for Dark Mode
+            const appearance = {
+                theme: 'night',
+                variables: {
+                    colorPrimary: '#4DDF9C',
+                    colorBackground: '#1a1a1a',
+                    colorText: '#F0F0F0',
+                    colorDanger: '#df4d4d',
+                    fontFamily: 'Roboto Mono, monospace',
+                    spacingUnit: '4px',
+                    borderRadius: '4px',
+                },
+            };
+
+            elements = stripe.elements({ appearance, clientSecret });
+            const paymentElement = elements.create("payment");
+            paymentElement.mount("#payment-element");
+        }
+
+        initialize();
+
+        // --- 4. HANDLE SUBMIT ---
+        document.querySelector("#submit").addEventListener("click", handleSubmit);
+
+        async function handleSubmit(e) {
+            e.preventDefault();
+            setLoading(true);
+
+            // Trigger form validation first
+            const emailField = document.getElementById("email");
+            const nameField = document.getElementById("name");
+            if(!emailField.value || !nameField.value) {
+                document.getElementById("error-message").textContent = "Please fill in all required fields.";
+                document.getElementById("error-message").style.display = "block";
+                setLoading(false);
+                return;
+            }
+
+            const { error } = await stripe.confirmPayment({
+                elements,
+                confirmParams: {
+                    // Make sure you have a 'thank-you.html' page created!
+                    return_url: window.location.origin + "/thank-you.html",
+                    receipt_email: emailField.value,
+                },
+            });
+
+            // This only runs on error (success redirects immediately)
+            if (error) {
+                const messageContainer = document.querySelector("#error-message");
+                messageContainer.textContent = error.message;
+                messageContainer.style.display = "block";
+            }
+            setLoading(false);
+        }
+
+        function setLoading(isLoading) {
+            if (isLoading) {
+                document.querySelector("#submit").disabled = true;
+                document.querySelector("#spinner").style.display = "inline-block";
+                document.querySelector("#button-text").textContent = "Processing...";
+            } else {
+                document.querySelector("#submit").disabled = false;
+                document.querySelector("#spinner").style.display = "none";
+                document.querySelector("#button-text").textContent = "Initialize Deployment";
+            }
+        }
+
+        // --- 5. LOGO EYE TRACKING ---
+        const eyeContainer = document.querySelector('.logo-letter.eye');
+        document.addEventListener('mousemove', (e) => {
+            if (!eyeContainer) return;
+            const rect = eyeContainer.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const deltaX = e.clientX - centerX;
+            const deltaY = e.clientY - centerY;
+            const angle = Math.atan2(deltaY, deltaX);
+            const distance = Math.min(Math.sqrt(deltaX * deltaX + deltaY * deltaY), 50); 
+            const moveDistance = (distance / 50) * 3;
+            const pupilX = Math.cos(angle) * moveDistance;
+            const pupilY = Math.sin(angle) * moveDistance;
+            eyeContainer.style.transform = `scale(0.9) translate(${pupilX}px, ${pupilY}px)`; 
+        });
+    </script>
+</body>
+</html>

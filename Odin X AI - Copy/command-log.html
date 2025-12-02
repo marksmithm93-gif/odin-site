@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OdinXAI - Command Log</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+        :root {
+            --odin-mint: #4DDF9C;
+            --odin-blue: #6453EE;
+            --odin-black: #000000;     
+            --odin-dark-bg: #0A0A0A;   
+            --odin-light-text: #F0F0F0;
+            --odin-white: #ffffff;
+            --font-main: 'Poppins', sans-serif;
+        }
+
+        /* --- Base Styles --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: var(--font-main);
+            background-color: var(--odin-dark-bg);
+            color: var(--odin-light-text);
+            line-height: 1.6;
+        }
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: var(--odin-black);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            color: var(--odin-mint);
+            font-size: 3em;
+            margin-bottom: 10px;
+            border-bottom: 2px solid rgba(77, 223, 156, 0.3);
+            padding-bottom: 15px;
+        }
+        h2 {
+            font-size: 1.8em;
+            color: var(--odin-blue);
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        p { margin-bottom: 20px; font-weight: 300; }
+        
+        .log-entry {
+            border-left: 3px solid var(--odin-mint);
+            padding-left: 20px;
+            margin-bottom: 25px;
+        }
+        .log-entry h3 {
+            font-size: 1.2em;
+            color: var(--odin-white);
+            margin-bottom: 5px;
+        }
+        .log-entry small {
+            color: #aaa;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .log-entry ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 10px;
+        }
+        .log-entry ul li {
+            background: rgba(77, 223, 156, 0.05);
+            padding: 5px 10px;
+            border-radius: 3px;
+            margin-bottom: 5px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 40px;
+            color: var(--odin-mint);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Command Log: Agent Updates</h1>
+        <p>A continuous record of major system upgrades, feature deployments, and architectural refinements for the OdinXAI Autonomous Agents platform.</p>
+
+        <div class="log-entry">
+            <h2>V2.1 - Operational Sovereignty Update</h2>
+            <small>Deployed: 2025-06-12</small>
+            <p>Significant improvements to multi-step workflow logic and cross-platform communication synchronization. Agents are now more resilient to complex or ambiguous customer queries.</p>
+            <ul>
+                <li>Integrated new intent detection module (Project Valkyrie).</li>
+                <li>Enhanced API stability for POS and Inventory synchronization.</li>
+                <li>Optimized memory usage for sustained 24/7 autonomous operation.</li>
+            </ul>
+        </div>
+        
+        <div class="log-entry">
+            <h2>V2.0 - Full Autonomy Release</h2>
+            <small>Deployed: 2025-04-01</small>
+            <p>The transition to fully autonomous agents capable of managing scheduling, payments, and reviews without human intervention. This release marks OdinXAI's entry into end-to-end operational control.</p>
+            <ul>
+                <li>Enabled full payment link generation and invoice automation.</li>
+                <li>Introduced AI-driven review generation module.</li>
+                <li>Major upgrade to voice and tone replication system.</li>
+            </ul>
+        </div>
+
+        <a href="index.html" class="back-link">&leftarrow; Return to Command Center</a>
+    </div>
+</body>
+</html>
