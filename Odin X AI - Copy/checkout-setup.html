@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Deployment Slot | OdinXAI</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        /* (Paste your CSS from the previous files here to keep the look) */
+        /* Ensure you include the dark mode styles */
+        body { background: #0A0A0A; color: white; font-family: sans-serif; padding: 20px; }
+        .container { max-width: 500px; margin: 50px auto; }
+        #payment-element { margin-bottom: 20px; }
+        button { background: #4DDF9C; color: black; width: 100%; padding: 15px; border: none; font-weight: bold; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 style="text-align: center; color: #4DDF9C;">Step 1: Secure Deployment Slot</h2>
+        <p style="text-align: center; margin-bottom: 30px;">Initiation Fee: <strong>$499.00</strong></p>
+        
+        <form id="payment-form">
+            <div id="payment-element"></div>
+            <button id="submit">Pay $499 & Continue</button>
+            <div id="error-message" style="color: red; margin-top: 10px;"></div>
+        </form>
+    </div>
+
+    <script>
+        // REPLACE WITH YOUR PUBLISHABLE KEY
+        const stripe = Stripe("pk_live_YOUR_KEY_HERE"); 
+
+        async function initialize() {
+            // We tell the backend we want to pay the 'setup_fee'
+            const response = await fetch("/.netlify/functions/create-payment-intent", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ plan: 'setup_fee' }), 
+            });
+
+            const { clientSecret } = await response.json();
+
+            const appearance = { theme: 'night', variables: { colorPrimary: '#4DDF9C' } };
+            elements = stripe.elements({ appearance, clientSecret });
+            const paymentElement = elements.create("payment");
+            paymentElement.mount("#payment-element");
+        }
+
+        initialize();
+
+        document.querySelector("#payment-form").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            // Redirect to Step 2 upon success
+            const { error } = await stripe.confirmPayment({
+                elements,
+                confirmParams: {
+                    // CRITICAL: Point this to your SECOND page
+                    return_url: window.location.origin + "/checkout-final.html", 
+                },
+            });
+
+            if (error) document.getElementById("error-message").textContent = error.message;
+        });
+    </script>
+</body>
+</html>
