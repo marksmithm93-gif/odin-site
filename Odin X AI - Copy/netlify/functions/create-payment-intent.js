@@ -17,7 +17,9 @@ exports.handler = async (event) => {
     } else if (plan === 'Scale') {
         amount = 29900; // $299.00
     } else {
-        throw new Error("Invalid Plan Selected");
+        // Fallback or Error
+        console.log("Unknown Plan:", plan);
+        return { statusCode: 400, body: JSON.stringify({ error: "Invalid Plan" }) };
     }
 
     const paymentIntent = await stripe.paymentIntents.create({
