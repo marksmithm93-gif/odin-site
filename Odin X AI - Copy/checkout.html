@@ -216,10 +216,30 @@
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        @media (max-width: 768px) {
-            .checkout-grid { grid-template-columns: 1fr; }
-            .order-summary { grid-row: 1; } 
-        }
+       /* --- MOBILE OPTIMIZATION --- */
+@media (max-width: 768px) {
+    .checkout-grid {
+        display: flex;
+        flex-direction: column-reverse; /* Puts Summary at bottom, Form at top */
+        gap: 40px;
+    }
+
+    .order-summary {
+        position: relative; 
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .form-section {
+        width: 100%;
+        min-height: 500px; /* Forces space for the Payment Element */
+    }
+
+    /* Fix tiny text on iPhones */
+    input[type="text"], input[type="email"] {
+        font-size: 16px; 
+        padding: 15px;
+    }
         
         footer { margin-top: auto; padding: 20px; text-align: center; font-size: 0.8em; color: #666; border-top: 1px solid #222; }
     </style>
@@ -414,4 +434,5 @@
         });
     </script>
 </body>
+
 </html>
