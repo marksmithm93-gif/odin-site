@@ -26,8 +26,45 @@
         .checkout-btn:disabled { background: #555; }
         .spinner { display: none; width: 20px; height: 20px; border: 3px solid rgba(0,0,0,0.3); border-radius: 50%; border-top-color: #000; animation: spin 1s infinite; margin-left: 10px; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        @media (max-width: 768px) { .checkout-grid { display: flex; flex-direction: column-reverse; gap: 40px; } }
-        footer { margin-top: auto; padding: 20px; text-align: center; font-size: 0.8em; color: #666; border-top: 1px solid #222; }
+   /* --- ROBUST MOBILE FIX --- */
+@media (max-width: 768px) {
+    .container {
+        margin: 20px auto; /* Less margin on phone */
+        width: 95%; /* Use full width */
+    }
+
+    .checkout-grid {
+        display: flex;
+        flex-direction: column-reverse; /* Summary Top, Form Bottom */
+        gap: 30px;
+    }
+
+    .order-summary {
+        position: relative; /* CRITICAL: Turn off Sticky on mobile */
+        top: 0;
+        width: 100%;
+        margin-bottom: 10px;
+        z-index: 1; /* Ensure it doesn't overlap form */
+    }
+
+    .form-section {
+        width: 100%;
+        position: relative;
+        z-index: 2; /* Form sits on top */
+    }
+
+    #payment-element {
+        min-height: 250px; /* Force extra space for the card inputs */
+        background: rgba(255, 255, 255, 0.05); /* Slight tint to see if it loads */
+        border-radius: 8px;
+        padding: 10px;
+    }
+    
+    /* Prevent iPhone Zooming */
+    input[type="text"], input[type="email"], select.terminal-select {
+        font-size: 16px !important; 
+        padding: 15px;
+    }
     </style>
 </head>
 <body>
