@@ -1,24 +1,22 @@
 require('dotenv').config();
+// The server reads the Secret Key from Netlify settings automatically
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
 exports.handler = async (event) => {
   try {
     const { plan } = JSON.parse(event.body);
-    
     let amount = 0;
 
-    // --- LOGIC: DETERMINE PRICE ---
+    // Price Logic (in cents)
     if (plan === 'setup_fee') {
-        amount = 49900; // $499.00 (The Setup Fee)
+        amount = 49900; // $499.00
     } else if (plan === 'Essential') {
-        amount = 9900;  // $99.00
+        amount = 9900;
     } else if (plan === 'Growth') {
-        amount = 19900; // $199.00
+        amount = 19900;
     } else if (plan === 'Scale') {
-        amount = 29900; // $299.00
+        amount = 29900;
     } else {
-        // Fallback or Error
-        console.log("Unknown Plan:", plan);
         return { statusCode: 400, body: JSON.stringify({ error: "Invalid Plan" }) };
     }
 
@@ -34,10 +32,6 @@ exports.handler = async (event) => {
       body: JSON.stringify({ clientSecret: paymentIntent.client_secret }),
     };
   } catch (error) {
-    console.log("Error:", error.message);
-    return {
-      statusCode: 400,
-      body: JSON.stringify({ error: error.message }),
-    };
+    return { statusCode: 400, body: JSON.stringify({ error: error.message }) };
   }
 };
