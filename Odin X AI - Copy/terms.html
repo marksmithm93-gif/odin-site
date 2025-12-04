@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms & Conditions | OdinXAI</title>
+    <link rel="icon" href="odinxai-logo.png" type="image/png">
+    
+    <style>
+        /* --- ODIN THEME CSS --- */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
+        :root {
+            --odin-mint: #4DDF9C;
+            --odin-blue: #6453EE;
+            --odin-black: #000000;     
+            --odin-dark-bg: #0A0A0A;   
+            --odin-light-text: #F0F0F0;
+            --odin-white: #ffffff;
+            --font-main: 'Poppins', sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
+            --font-logo: 'Orbitron', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--odin-dark-bg);
+            color: var(--odin-light-text);
+            line-height: 1.8;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            /* Tech Grid Background */
+            background-image: 
+                linear-gradient(rgba(77, 223, 156, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(77, 223, 156, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        /* --- HEADER --- */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(77, 223, 156, 0.2);
+            background: rgba(10, 10, 10, 0.95);
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--odin-light-text);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center; 
+            font-family: var(--font-logo);
+            letter-spacing: 2px;
+        }
+        
+        .logo-letter.eye {
+            color: var(--odin-mint);
+            font-size: 1.5em; 
+            display: flex; align-items: center; justify-content: center;
+            width: 20px; height: 20px; border-radius: 50%;
+            background: rgba(77, 223, 156, 0.2);
+            margin: 0 5px; position: relative;
+        }
+        .logo-letter.eye::before {
+            content: ''; display: block; width: 8px; height: 8px;
+            background-color: var(--odin-blue); border-radius: 50%;
+            position: absolute;
+        }
+
+        /* --- CONTENT LAYOUT --- */
+        .container {
+            width: 90%;
+            max-width: 900px; /* Reading width */
+            margin: 60px auto;
+            flex-grow: 1;
+        }
+
+        h1 {
+            font-family: var(--font-logo);
+            color: var(--odin-mint);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            border-bottom: 2px solid var(--odin-blue);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .last-updated {
+            font-family: var(--font-mono);
+            color: #888;
+            margin-bottom: 40px;
+            display: block;
+            font-size: 0.9em;
+        }
+
+        .terms-content {
+            background: rgba(26, 26, 26, 0.5);
+            padding: 40px;
+            border-radius: 10px;
+            border: 1px solid rgba(77, 223, 156, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        h2 {
+            color: var(--odin-white);
+            margin-top: 40px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-left: 4px solid var(--odin-mint);
+            padding-left: 15px;
+        }
+
+        p { margin-bottom: 20px; color: #ddd; }
+
+        ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            list-style: none;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            color: #ccc;
+        }
+
+        ul li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--odin-mint);
+            font-family: var(--font-mono);
+            font-weight: bold;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: var(--odin-mint);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-weight: 700;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        footer {
+            margin-top: auto;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+            border-top: 1px solid #222;
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .terms-content { padding: 20px; }
+            h1 { font-size: 1.8em; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">
+            <span class="logo-letter eye"></span>ODINXAI
+        </a>
+    </header>
+
+    <div class="container">
+        <a href="index.html" class="back-link">&lt; // RETURN TO BASE</a>
+        
+        <h1>Terms & Conditions</h1>
+        <span class="last-updated">Last Updated: December 2025</span>
+
+        <div class="terms-content">
+            <p><strong>OdinXAI is a division of Odin Merchant Hub LLC (New Jersey).</strong><br>
+            By accessing or using this website and any OdinXAI services, you agree to these Terms & Conditions.</p>
+
+            <h2>1. General Use of the Site</h2>
+            <p>This website and its content are provided for general informational and marketing purposes. Nothing on this site constitutes professional advice (legal, financial, medical, accounting, compliance, or otherwise). OdinXAI may update the content or these Terms at any time.</p>
+
+            <h2>2. No Warranties</h2>
+            <p>All information, descriptions, claims, and product details on this website are provided “AS IS” and “AS AVAILABLE” with no warranties of any kind.</p>
+            <p>OdinXAI does not guarantee:</p>
+            <ul>
+                <li>Accuracy of content</li>
+                <li>Specific business outcomes</li>
+                <li>Performance of AI systems</li>
+                <li>Uninterrupted website availability</li>
+            </ul>
+
+            <h2>3. AI & Automation Disclaimer</h2>
+            <p>Any references to AI agents, automation capabilities, workflows, or integrations are conceptual representations. Actual features and deliverables depend on:</p>
+            <ul>
+                <li>The Client’s selected Plan</li>
+                <li>The Service Agreement</li>
+                <li>Onboarding information provided by the Client</li>
+            </ul>
+            <p>AI outputs may be inaccurate and must be reviewed by the Client before use.</p>
+
+            <h2>4. Payments, Plans & Subscriptions</h2>
+            <p>All pricing, plans, and features displayed on this site are subject to change at any time. Actual terms—including pricing, agent caps, and deliverables—are governed by the executed Service Agreement between OdinXAI and the Client. If there is any conflict between the Service Agreement and website content, the Service Agreement controls.</p>
+
+            <h2>5. No Input of Sensitive or Regulated Data</h2>
+            <p>You must not input or transmit any of the following through OdinXAI’s systems:</p>
+            <ul>
+                <li>PCI cardholder data</li>
+                <li>PHI (protected health information)</li>
+                <li>Social Security numbers</li>
+                <li>Banking credentials</li>
+                <li>Sensitive personal data (as defined by applicable regulations)</li>
+            </ul>
+            <p>OdinXAI does not store or process regulated data. Entering such data violates these Terms.</p>
+
+            <h2>6. Intellectual Property</h2>
+            <p>All website content, software logic, workflows, prompts, branding, and materials are the exclusive property of Odin Merchant Hub LLC and its licensors.</p>
+            <p>You may not copy, reuse, reverse engineer, scrape, extract, replicate, or create derivative works from this site or any OdinXAI material.</p>
+
+            <h2>7. Links to Third-Party Services</h2>
+            <p>Some AI automations require integration with Client-owned third-party tools (e.g., payment processors, CRMs, communication platforms).</p>
+            <p>OdinXAI is not responsible for:</p>
+            <ul>
+                <li>Third-party service performance</li>
+                <li>Outages</li>
+                <li>Data handling practices</li>
+                <li>Compliance obligations</li>
+                <li>Fees charged by third parties</li>
+            </ul>
+
+            <h2>8. Limitation of Liability</h2>
+            <p>To the maximum extent permitted by law, OdinXAI is not liable for:</p>
+            <ul>
+                <li>Lost profits or revenue</li>
+                <li>Business interruption</li>
+                <li>Loss of data</li>
+                <li>Reliance on website content</li>
+                <li>Accuracy or performance of AI systems</li>
+                <li>Indirect, incidental, or consequential damages</li>
+            </ul>
+
+            <h2>9. Governing Law</h2>
+            <p>These Terms are governed by the laws of the State of New Jersey, without regard to conflict-of-law principles.</p>
+
+            <h2>10. Contact Information</h2>
+            <p><strong>Odin Merchant Hub LLC</strong><br>
+            New Jersey, USA<br>
+            Email: <a href="mailto:support@odinxai.com" style="color:var(--odin-mint);">support@odinxai.com</a></p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container footer-content" style="margin:0 auto; padding:0;">
+            <p>© 2025 ODINXAI. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- LOGO EYE TRACKING (Consistent Effect) ---
+        const eyeContainer = document.querySelector('.logo-letter.eye');
+        document.addEventListener('mousemove', (e) => {
+            if (!eyeContainer) return;
+            const rect = eyeContainer.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const deltaX = e.clientX - centerX;
+            const deltaY = e.clientY - centerY;
+            const angle = Math.atan2(deltaY, deltaX);
+            const distance = Math.min(Math.sqrt(deltaX * deltaX + deltaY * deltaY), 50); 
+            const moveDistance = (distance / 50) * 3;
+            const pupilX = Math.cos(angle) * moveDistance;
+            const pupilY = Math.sin(angle) * moveDistance;
+            eyeContainer.style.transform = `scale(0.9) translate(${pupilX}px, ${pupilY}px)`; 
+        });
+    </script>
+</body>
+</html>
