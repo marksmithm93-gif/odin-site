@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | OdinXAI</title>
+    <link rel="icon" href="odinxai-logo.png" type="image/png">
+    
+    <style>
+        /* --- ODIN THEME CSS --- */
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+
+        :root {
+            --odin-mint: #4DDF9C;
+            --odin-blue: #6453EE;
+            --odin-black: #000000;     
+            --odin-dark-bg: #0A0A0A;   
+            --odin-light-text: #F0F0F0;
+            --odin-white: #ffffff;
+            --font-main: 'Poppins', sans-serif;
+            --font-mono: 'Roboto Mono', monospace;
+            --font-logo: 'Orbitron', sans-serif;
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--odin-dark-bg);
+            color: var(--odin-light-text);
+            line-height: 1.8;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-image: 
+                linear-gradient(rgba(77, 223, 156, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(77, 223, 156, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        /* --- HEADER --- */
+        header {
+            padding: 20px 0;
+            border-bottom: 1px solid rgba(77, 223, 156, 0.2);
+            background: rgba(10, 10, 10, 0.95);
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: var(--odin-light-text);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center; 
+            font-family: var(--font-logo);
+            letter-spacing: 2px;
+        }
+        
+        .logo-letter.eye {
+            color: var(--odin-mint);
+            font-size: 1.5em; 
+            display: flex; align-items: center; justify-content: center;
+            width: 20px; height: 20px; border-radius: 50%;
+            background: rgba(77, 223, 156, 0.2);
+            margin: 0 5px; position: relative;
+        }
+        .logo-letter.eye::before {
+            content: ''; display: block; width: 8px; height: 8px;
+            background-color: var(--odin-blue); border-radius: 50%;
+            position: absolute;
+        }
+
+        /* --- CONTENT LAYOUT --- */
+        .container {
+            width: 90%;
+            max-width: 900px;
+            margin: 60px auto;
+            flex-grow: 1;
+        }
+
+        h1 {
+            font-family: var(--font-logo);
+            color: var(--odin-mint);
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            border-bottom: 2px solid var(--odin-blue);
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .last-updated {
+            font-family: var(--font-mono);
+            color: #888;
+            margin-bottom: 40px;
+            display: block;
+            font-size: 0.9em;
+        }
+
+        .privacy-content {
+            background: rgba(26, 26, 26, 0.5);
+            padding: 40px;
+            border-radius: 10px;
+            border: 1px solid rgba(77, 223, 156, 0.2);
+            backdrop-filter: blur(5px);
+        }
+
+        h2 {
+            color: var(--odin-white);
+            margin-top: 40px;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+            border-left: 4px solid var(--odin-mint);
+            padding-left: 15px;
+        }
+
+        h3 {
+            color: var(--odin-mint);
+            font-size: 1.1em;
+            margin-top: 25px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        p { margin-bottom: 20px; color: #ddd; }
+
+        ul {
+            margin-bottom: 20px;
+            padding-left: 20px;
+            list-style: none;
+        }
+
+        ul li {
+            position: relative;
+            padding-left: 20px;
+            margin-bottom: 8px;
+            color: #ccc;
+        }
+
+        ul li::before {
+            content: '>';
+            position: absolute;
+            left: 0;
+            color: var(--odin-mint);
+            font-family: var(--font-mono);
+            font-weight: bold;
+        }
+
+        .cookie-notice {
+            margin-top: 50px;
+            padding: 20px;
+            border: 1px dashed var(--odin-mint);
+            background: rgba(77, 223, 156, 0.05);
+            border-radius: 8px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 30px;
+            color: var(--odin-mint);
+            text-decoration: none;
+            font-family: var(--font-mono);
+            font-weight: 700;
+        }
+        .back-link:hover { text-decoration: underline; }
+
+        footer {
+            margin-top: auto;
+            padding: 40px 0;
+            text-align: center;
+            font-size: 0.9em;
+            color: #666;
+            border-top: 1px solid #222;
+        }
+
+        @media (max-width: 768px) {
+            .privacy-content { padding: 20px; }
+            h1 { font-size: 1.8em; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">
+            <span class="logo-letter eye"></span>ODINXAI
+        </a>
+    </header>
+
+    <div class="container">
+        <a href="index.html" class="back-link">&lt; // RETURN TO BASE</a>
+        
+        <h1>Privacy Policy</h1>
+        <span class="last-updated">Last Updated: December 2025</span>
+
+        <div class="privacy-content">
+            <p><strong>OdinXAI is a division of Odin Merchant Hub LLC</strong>, a New Jersey–registered company (“we,” “us,” or “our”). This Privacy Policy explains how we collect, use, and protect information when you use our website or services.</p>
+            <p>By accessing OdinXAI or submitting information on this site, you agree to this Privacy Policy.</p>
+
+            <h2>1. Information We Collect</h2>
+            <p>We may collect the following types of information:</p>
+            
+            <h3>Information You Provide</h3>
+            <ul>
+                <li>Name, email, phone number, business details</li>
+                <li>Inquiry or onboarding information</li>
+                <li>Information submitted through website forms</li>
+            </ul>
+
+            <h3>Automatically Collected Information</h3>
+            <ul>
+                <li>Device type, browser type, IP address</li>
+                <li>Pages viewed, time spent on site</li>
+                <li>General analytics data</li>
+            </ul>
+
+            <h3>No Sensitive Data</h3>
+            <p>We do not request, store, or process:</p>
+            <ul>
+                <li>Credit card numbers (PCI data)</li>
+                <li>Protected health information (PHI)</li>
+                <li>Social Security numbers</li>
+                <li>Highly sensitive personal data</li>
+            </ul>
+            <p>You must not submit such data through our website or services.</p>
+
+            <h2>2. How We Use Your Information</h2>
+            <p>We use personal and business information to:</p>
+            <ul>
+                <li>Respond to inquiries</li>
+                <li>Provide product information or onboarding</li>
+                <li>Improve website performance</li>
+                <li>Communicate updates, offers, or support</li>
+                <li>Analyze website usage</li>
+            </ul>
+            <p>We do not sell personal information.</p>
+
+            <h2>3. How We Share Information</h2>
+            <p>We may share information with:</p>
+            <ul>
+                <li>Service providers (e.g., analytics tools, hosting providers)</li>
+                <li>Communication tools used for customer support</li>
+                <li>Third-party platforms you choose to integrate with (e.g., CRM or payment processors)</li>
+            </ul>
+            <p>We do not share information for resale or advertising unrelated to OdinXAI. We will disclose information only if legally required (e.g., subpoenas, compliance obligations).</p>
+
+            <h2>4. Data Security</h2>
+            <p>We use industry-standard security measures to protect information. However, no online system is 100% secure. You acknowledge that you submit information at your own risk.</p>
+
+            <h2>5. Your Choices</h2>
+            <p>You may request:</p>
+            <ul>
+                <li>Access to your information</li>
+                <li>Correction of your information</li>
+                <li>Deletion of your information (where legally allowed)</li>
+                <li>To opt out of marketing emails</li>
+            </ul>
+            <p>Requests can be submitted to: <a href="mailto:support@odinxai.com" style="color:var(--odin-mint);">support@odinxai.com</a></p>
+
+            <h2>6. Third-Party Links & Integrations</h2>
+            <p>Our website may link to or integrate with third-party tools, such as:</p>
+            <ul>
+                <li>Calendars</li>
+                <li>CRMs</li>
+                <li>Messaging platforms</li>
+                <li>Payment processors</li>
+                <li>Analytics tools</li>
+            </ul>
+            <p>We are not responsible for the privacy practices of these external services.</p>
+
+            <h2>7. Children’s Privacy</h2>
+            <p>OdinXAI is not intended for individuals under 18. We do not knowingly collect information from minors.</p>
+
+            <h2>8. Changes to This Policy</h2>
+            <p>We may update this Privacy Policy from time to time. The “Last Updated” date will reflect the latest version.</p>
+
+            <h2>9. Contact Us</h2>
+            <p><strong>Odin Merchant Hub LLC</strong><br>
+            New Jersey, USA<br>
+            Email: <a href="mailto:support@odinxai.com" style="color:var(--odin-mint);">support@odinxai.com</a></p>
+
+            <div class="cookie-notice">
+                <h3>COOKIE NOTICE</h3>
+                <p style="margin-bottom:0;">This site uses cookies and analytics tools to improve your experience. By continuing to browse, you agree to our use of cookies.</p>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container footer-content" style="margin:0 auto; padding:0;">
+            <p>© 2025 ODINXAI. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- LOGO EYE TRACKING ---
+        const eyeContainer = document.querySelector('.logo-letter.eye');
+        document.addEventListener('mousemove', (e) => {
+            if (!eyeContainer) return;
+            const rect = eyeContainer.getBoundingClientRect();
+            const centerX = rect.left + rect.width / 2;
+            const centerY = rect.top + rect.height / 2;
+            const deltaX = e.clientX - centerX;
+            const deltaY = e.clientY - centerY;
+            const angle = Math.atan2(deltaY, deltaX);
+            const distance = Math.min(Math.sqrt(deltaX * deltaX + deltaY * deltaY), 50); 
+            const moveDistance = (distance / 50) * 3;
+            const pupilX = Math.cos(angle) * moveDistance;
+            const pupilY = Math.sin(angle) * moveDistance;
+            eyeContainer.style.transform = `scale(0.9) translate(${pupilX}px, ${pupilY}px)`; 
+        });
+    </script>
+</body>
+</html>
