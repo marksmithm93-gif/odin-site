@@ -6,31 +6,26 @@
     <title>Activate Subscription | OdinXAI</title>
     <link rel="icon" href="odinxai-logo.png" type="image/png">
     <script src="https://js.stripe.com/v3/"></script>
-    
     <style>
-        /* (Same CSS as above for consistency - Abbreviated here for space, but ensures same look) */
+        /* CSS Same as Setup Page */
         @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
         :root { --odin-mint: #4DDF9C; --odin-blue: #6453EE; --odin-dark-bg: #0A0A0A; --odin-light-text: #F0F0F0; --odin-gray: #1a1a1a; --font-main: 'Poppins', sans-serif; --font-mono: 'Roboto Mono', monospace; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body { font-family: var(--font-main); background-color: var(--odin-dark-bg); color: var(--odin-light-text); min-height: 100vh; display: flex; flex-direction: column; background-image: linear-gradient(rgba(77, 223, 156, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(77, 223, 156, 0.03) 1px, transparent 1px); background-size: 30px 30px; }
         .container { width: 90%; max-width: 1100px; margin: 40px auto; flex-grow: 1; }
         .checkout-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 40px; }
         .form-section h2 { font-size: 1.8em; margin-bottom: 20px; border-bottom: 2px solid var(--odin-mint); display: inline-block; padding-bottom: 5px; }
-        
-        select.terminal-select { width: 100%; padding: 12px 15px; background: var(--odin-gray); border: 1px solid var(--odin-mint); border-radius: 6px; color: var(--odin-light-text); font-family: var(--font-mono); margin-bottom: 20px; font-size: 1em; }
-        
+        select.terminal-select { width: 100%; padding: 12px 15px; background: var(--odin-gray); border: 1px solid var(--odin-mint); border-radius: 6px; color: var(--odin-light-text); font-family: var(--font-mono); margin-bottom: 20px; font-size: 16px; }
         .order-summary { background: rgba(26, 26, 26, 0.6); border: 1px solid var(--odin-blue); border-radius: 10px; padding: 30px; position: sticky; top: 20px; backdrop-filter: blur(10px); }
         .summary-header { margin-bottom: 25px; font-family: var(--font-mono); font-size: 0.9em; color: var(--odin-mint); border-bottom: 1px dashed rgba(77, 223, 156, 0.3); padding-bottom: 10px; }
         .line-item { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 0.95em; }
         .line-item.total { margin-top: 20px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,0.1); font-size: 1.2em; font-weight: 700; color: var(--odin-mint); }
-        
         .checkout-btn { width: 100%; background-color: var(--odin-mint); color: var(--odin-black); padding: 15px; border: none; border-radius: 50px; font-weight: 700; font-size: 1.1em; cursor: pointer; margin-top: 20px; }
-        .checkout-btn:hover { background-color: #3ecc8c; }
         .checkout-btn:disabled { background: #555; }
         .spinner { display: none; width: 20px; height: 20px; border: 3px solid rgba(0,0,0,0.3); border-radius: 50%; border-top-color: #000; animation: spin 1s infinite; margin-left: 10px; }
         @keyframes spin { to { transform: rotate(360deg); } }
-        
         @media (max-width: 768px) { .checkout-grid { display: flex; flex-direction: column-reverse; gap: 40px; } }
         footer { margin-top: auto; padding: 20px; text-align: center; font-size: 0.8em; color: #666; border-top: 1px solid #222; }
     </style>
@@ -40,66 +35,52 @@
         <div class="checkout-grid">
             <div class="form-section">
                 <h2>Activate Subscription</h2>
-                <p style="margin-bottom: 20px;">Your Setup Fee has been received. Please select your monthly plan to finalize deployment.</p>
-                
+                <p style="margin-bottom: 20px;">Your Setup Fee has been received. Please select your monthly plan.</p>
                 <label style="color:var(--odin-mint);">Select Deployment Tier</label>
                 <select id="plan-selector" class="terminal-select">
                     <option value="Essential">Essential ($99/mo)</option>
                     <option value="Growth" selected>Growth ($199/mo)</option>
                     <option value="Scale">Scale ($299/mo)</option>
                 </select>
-
                 <div id="payment-element" style="min-height: 200px;"></div>
                 <div id="error-message" style="color: #ff4d4d; display:none; margin-top:10px;"></div>
             </div>
-
             <aside class="order-summary">
                 <div class="summary-header">// STEP 2 OF 2</div>
                 <div class="line-item"><span>Setup Fee</span><span style="color:var(--odin-mint); font-weight:700;">PAID</span></div>
                 <div class="line-item"><span>Monthly Subscription</span><span id="summary-price">$199.00</span></div>
                 <div class="line-item total"><span>Due Now</span><span id="summary-total">$199.00</span></div>
-
-                <button id="submit" class="checkout-btn">
-                    <span id="button-text">Activate Subscription</span>
-                    <div class="spinner" id="spinner"></div>
-                </button>
+                <button id="submit" class="checkout-btn"><span id="button-text">Activate Subscription</span><div class="spinner" id="spinner"></div></button>
             </aside>
         </div>
     </div>
     <footer>&copy; 2025 OdinXAI. All payments processed securely via Stripe.</footer>
-
     <script>
-        // REPLACE WITH YOUR LIVE KEY
-        const stripe = Stripe("pk_live_YOUR_KEY_HERE"); 
+        // YOUR LIVE PUBLISHABLE KEY
+        const stripe = Stripe("pk_live_51SZezoR2XYF5ce4J24aYrjKGm9FHvu89aQUsR7sPakTRw6VK6zVcAD9K03m43LagVOd7VCiIt9P0qVZ2dgFnUIf100StFAUJdp"); 
 
         const plans = { 'Essential': 99, 'Growth': 199, 'Scale': 299 };
         let elements, paymentElement;
 
         async function initialize(planName) {
-            // Ask backend for plan price (e.g. Growth $199)
             const response = await fetch("/.netlify/functions/create-payment-intent", {
                 method: "POST", headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ plan: planName }), 
             });
-            
             if (!response.ok) {
                 const txt = await response.text();
                 document.getElementById('error-message').textContent = "Error: " + txt;
                 document.getElementById('error-message').style.display = 'block';
                 return;
             }
-
             const { clientSecret } = await response.json();
             const appearance = { theme: 'night', variables: { colorPrimary: '#4DDF9C', colorBackground: '#1a1a1a', colorText: '#F0F0F0' } };
-            
             if(paymentElement) paymentElement.unmount();
             elements = stripe.elements({ appearance, clientSecret });
             paymentElement = elements.create("payment");
             paymentElement.mount("#payment-element");
         }
-
-        // Initialize with Growth
-        initialize('Growth');
+        initialize('Growth'); // Default
 
         document.getElementById('plan-selector').addEventListener('change', (e) => {
             const plan = e.target.value;
@@ -116,10 +97,7 @@
                 elements,
                 confirmParams: { return_url: window.location.origin + "/thank-you.html" },
             });
-            if (error) {
-                document.getElementById("error-message").textContent = error.message;
-                document.getElementById("error-message").style.display = "block";
-            }
+            if (error) { document.getElementById("error-message").textContent = error.message; document.getElementById("error-message").style.display = "block"; }
             setLoading(false);
         });
 
